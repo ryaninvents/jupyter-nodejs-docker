@@ -7,8 +7,11 @@ RUN apt-get update \
     && n lts
 RUN npm install -g --unsafe-perm ijavascript yarn \
     && ijsinstall --install=global
+RUN apt-get -y install zsh vim
 RUN apt-get autoremove \
     && apt-get clean
+RUN echo "ALL ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
 ENTRYPOINT [ "/scripts/sys/init.sh" ]
 VOLUME [ "/workdir" ]
 VOLUME [ "/home_host" ]
